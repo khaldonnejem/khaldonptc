@@ -17,10 +17,39 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about',function(){
+// -------------------------------------------------------------
+
+
+Route::get('about', function () {
     $name = 'khaldon';
+
     // return view('about',['name' => $name]);
     // return view('about')->with('name',$name);
-    return view('about',compact('name'));
+    return view('about', compact('name'));
+});
+Route::post('about', function () {
+    $name = 'khaldon';
+    // if (isset($_POST('name')
+    //     $name = $_POST['name']));
+    // return view('about', compact('name'));
+    if (isset($_POST['name']))
+        $name = $_POST['name'];
+
+    return view('about', compact('name'));
 });
 
+Route::get('send', function () {
+    $name = $_GET['name'];
+    // return $name;
+    return view('about', compact('name'));
+});
+
+// -------------------------------------------------------------
+Route::get('task', function () {
+    $name = 'Khaldon';
+    $tasks = [
+        'task1', 'task2', 'task3'
+    ];
+    return view('task', compact('tasks', 'name'));
+});
+// -------------------------------------------------------------------
