@@ -15,8 +15,8 @@
     <h3>Tasks: </h3>
 
     <ul>
-        @foreach ($tasks as $task)
-            <li>{{ $task }}</li>
+        @foreach ($tasks as $key => $task)
+            <li><a href="{{ 'show/' . $key }}">{{ $task }}</a></li>
         @endforeach
     </ul>
 </body>
