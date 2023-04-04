@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // -------------------------------------------------------------
 
@@ -57,7 +57,7 @@ Route::get('/', function () {
 //     if (isset($_GET['name']))
 //         $name = $_GET['name'];
 //     // return $name;
-//     return view('.without-controllerabout', compact('name'));
+//     return view('without-controller.about', compact('name'));
 // });
 
 // -------------------------------------------------------------
@@ -122,4 +122,8 @@ Route::get('/', function () {
 //     return view('front.tasks');
 // });
 
-Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/', [TaskController::class, 'index'])->name('tasks');
+Route::post('create', [TaskController::class, 'create'])->name('task.create');
+Route::delete('delete/{id}', [TaskController::class, 'destroy'])->name('task.delete');
+Route::put('edit/{id}', [TaskController::class, 'edit'])->name('task.edit');
+Route::patch('update/{id}', [TaskController::class, 'update'])->name('task.update');

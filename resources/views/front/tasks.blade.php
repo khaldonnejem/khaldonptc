@@ -10,8 +10,10 @@
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     <!-- New Task Form -->
-                    <form action="#" method="POST" class="form-horizontal">
 
+                    {{-- <form action="{{ url('create') }}" method="POST" class="form-horizontal"> --}}
+                    <form action="{{ route('task.create') }}" method="POST" class="form-horizontal">
+                        @csrf
                         <!-- Task Name -->
                         <div class="form-group">
                             <label for="task-name" class="col-sm-3 control-label">Task</label>
@@ -43,51 +45,50 @@
                     <table class="table table-striped task-table">
                         <thead>
                             <th>Task</th>
+                            <th>Created at</th>
                             <th>&nbsp;</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="table-text">
-                                    <div>Task 1</div>
-                                </td>
+                            @foreach ($tasks as $task)
+                                <tr>
+                                    <td class="table-text">
+                                        <div>{{ $task->name }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $task->created_at }}</div>
+                                    </td>
 
-                                <!-- Task Delete Button -->
-                                <td>
-                                    <form action="#" method="POST">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-trash"></i>Delete
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-text">
-                                    <div>Task 2</div>
-                                </td>
+                                    <!-- Task Delete Button -->
+                                    <td>
+                                        <form action="{{ route('task.delete', $task->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-btn fa-trash"></i>Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('task.edit', $task->id) }}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit" class="btn btn-info">
+                                                <i class="fa fa-btn fa-pencil"></i>Edit
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('task.update', $task->id) }}" method="POST">
+                                            @csrf
+                                            @method('patch')
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fa fa-btn fa-refresh"></i>Update
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
 
-                                <!-- Task Delete Button -->
-                                <td>
-                                    <form action="#" method="POST">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-trash"></i>Delete
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-text">
-                                    <div>Task 3</div>
-                                </td>
-
-                                <!-- Task Delete Button -->
-                                <td>
-                                    <form action="#" method="POST">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-trash"></i>Delete
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
